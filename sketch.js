@@ -11,7 +11,7 @@ var particles1 = [];
 var plinko1 = [];
 var division1 = [];
 var divisionheight=300;
-var score = 0, par,turn = 5;
+var score = 0, par,turn = 5,turn2=5;
 var state=1;
 function setup() {
   createCanvas(485,650);
@@ -43,6 +43,9 @@ function draw() {
  text("500",20,385)
  text("350",340,385)
  text("350",420,385)
+ textSize(25)
+ text(turn,263,55)
+ text("Turn:",190,55)
  pop()
 
  push()
@@ -90,11 +93,6 @@ for (var j = 15; j <= width-10;j=j+50){
         
           }
           
-if (par != null){
-
-par.display()
-
-}
 
        
 
@@ -109,18 +107,45 @@ state=0;
 
 }
 
+if(turn2 <0){
+
+  if(mouseX !== 0 && mouseY !== 0){
+    fill(color(mouseY,mouseX,mouseX))
+    }else {fill("white")
+}
+  textSize(30)
+  textFont("algerian")
+text("GAMEOVER",150,275)
+
+World.remove(world,par.body);
+
+}
+
+if (par != null){
+
+  par.display()
+  
+  }
+  
+
 
 }
 
 function mousePressed(){
   console.log(turn)
-  if ( turn >= 1 && turn != -1){
+  if ( turn >= 1 && turn != -1 ){
 par = new particles(mouseX,10,7)
   }
 
   if(turn >= 1){
 turn=turn-1;
+
   }
+
+
+  
+  turn2=turn2-1;
+
 }
 
 
@@ -175,7 +200,7 @@ if (score > 1000 && turn == 3){
       score=score-500
       }
     
-      if (score > 2000 && turn == 0){
+      if (score > 2000 && turn <= 0){
         score=score-500
         }
       
@@ -204,7 +229,7 @@ score=score+100
         score=score-100
         }
       
-        if (score > 500 && turn == 0){
+        if (score > 500 && turn <= 0){
           score=score-100
           }
         
@@ -228,7 +253,7 @@ score=score+100
           score=score-350
           }
         
-          if (score > 1400 && turn == 1){
+          if (score > 1400 && turn <= 1){
             score=score-100
             }
           
